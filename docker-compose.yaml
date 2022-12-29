@@ -1,0 +1,19 @@
+version: "3.0"
+services:
+  web-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+  test-server:
+    build:
+      context: ./tests
+      dockerfile: Dockerfile
+    environment:
+      - BASE_URL=http://web-app:8000
+      - DEFAULT_USER=admin
+      - DEFAULT_PASS=admin
+    depends_on:
+      - web-app
+
